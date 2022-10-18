@@ -1,6 +1,6 @@
 package main;
 
-public class Marco {
+public class Marco extends Detalle {
 
 	static private int numAuto;
 
@@ -8,24 +8,8 @@ public class Marco {
 		numAuto = 1;
 	}
 
-	private String id;
-
 	public Marco() {
-		this.id = "M" + Marco.numAuto;
-		Marco.numAuto++;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	@Override
-	public String toString() {
-		return id;
+		super("M" + numAuto++);
 	}
 
 }

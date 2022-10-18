@@ -26,49 +26,85 @@ public class Operarios {
 		this.numMaximoMarcos = numMaximoMarcos;
 	}
 
-	public synchronized void construirMarco() throws InterruptedException {
-		while (marcos.size() >= numMaximoMarcos) {
-			System.out.println("Array marcos está llena");
-			wait();
+	public void construirDetalle(String detalle) throws InterruptedException {
+		switch (detalle) {
+		case "rueda":
+			construirRueda();
+			break;
+
+		case "marco":
+			construirMarco();
+			break;
+
+		case "bicicleta":
+			construirBicicleta();
+			break;
+
+		default:
+			break;
 		}
-
-		Thread.sleep(500);
-		Marco nuevoMarco = new Marco();
-		System.out.println(Thread.currentThread().getName() + ": ha creado un nuevo marco - " + nuevoMarco.getId());
-		marcos.add(nuevoMarco);
-
-		notifyAll();
 	}
 
-	public synchronized void construirRueda() throws InterruptedException {
-		while (ruedas.size() >= numMaximoRuedas) {
-			System.out.println("Array ruedas está llena");
-			wait();
+	public void construirMarco() throws InterruptedException {
+		synchronized (this) {
+			while (marcos.size() >= numMaximoMarcos) {
+				System.out.println("Array marcos está llena");
+				wait();
+			}
 		}
-		Thread.sleep(100);
-		Rueda nuevaRueda = new Rueda();
-		System.out.println(Thread.currentThread().getName() + ": ha creado una nueva rueda - " + nuevaRueda.getId());
-		ruedas.add(nuevaRueda);
-		notifyAll();
+
+		Thread.sleep(2000);
+
+		synchronized (this) {
+			Marco nuevoMarco = new Marco();
+			System.out.println(Thread.currentThread().getName() + ": ha creado un nuevo marco - " + nuevoMarco.getId());
+			marcos.add(nuevoMarco);
+			notifyAll();
+		}
 	}
 
-	public synchronized void construirBicicleta() throws InterruptedException {
-		while (ruedas.size() < 2 || marcos.size() < 1) {
-			wait();
+	public void construirRueda() throws InterruptedException {
+		synchronized (this) {
+			while (ruedas.size() >= numMaximoRuedas) {
+				System.out.println("Array ruedas está llena");
+				wait();
+			}
 		}
+
 		Thread.sleep(1000);
 
-		List<Rueda> ruedasBicicleta = ruedas.subList(0, 2);
-		List<Marco> marcosBicicleta = marcos.subList(0, 1);
+		synchronized (this) {
+			Rueda nuevaRueda = new Rueda();
+			System.out
+					.println(Thread.currentThread().getName() + ": ha creado una nueva rueda - " + nuevaRueda.getId());
+			ruedas.add(nuevaRueda);
+			notifyAll();
+		}
+	}
 
-		Bicicleta nuevaBicicleta = new Bicicleta(ruedasBicicleta, marcosBicicleta.get(0));
-		System.out.println(nuevaBicicleta);
-		bicicletas.add(nuevaBicicleta);
+	public void construirBicicleta() throws InterruptedException {
+		synchronized (this) {
+			while (ruedas.size() < 2 || marcos.size() < 1) {
+				wait();
+			}
+		}
 
-		ruedasBicicleta.clear();
-		marcosBicicleta.clear();
+		Thread.sleep(3000);
 
-		notifyAll();
+		synchronized (this) {
+			List<Rueda> ruedasBicicleta = ruedas.subList(0, 2);
+			List<Marco> marcosBicicleta = marcos.subList(0, 1);
+
+			Bicicleta nuevaBicicleta = new Bicicleta(ruedasBicicleta, marcosBicicleta.get(0));
+			System.out
+					.println(Thread.currentThread().getName() + ": ha creado una nueva bicicleta - " + nuevaBicicleta);
+			bicicletas.add(nuevaBicicleta);
+
+			ruedasBicicleta.clear();
+			marcosBicicleta.clear();
+
+			notifyAll();
+		}
 	}
 
 	public int getNumBicicletas() {
