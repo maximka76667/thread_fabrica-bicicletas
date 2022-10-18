@@ -1,9 +1,9 @@
 package main;
 
-public class Detalle {
+public class Objeto {
 	private String id;
 
-	public Detalle(String id) {
+	public Objeto(String id) {
 		this.id = id;
 	}
 

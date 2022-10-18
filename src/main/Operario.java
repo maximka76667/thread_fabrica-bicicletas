@@ -3,11 +3,11 @@ package main;
 public class Operario implements Runnable {
 	private Operarios operarios;
 	private int iteraciones;
-	private String detalle;
+	private String objeto;
 
-	public Operario(Operarios operarios, String detalle, int iteraciones) {
+	public Operario(Operarios operarios, String objeto, int iteraciones) {
 		this.operarios = operarios;
-		this.detalle = detalle;
+		this.objeto = objeto;
 		this.iteraciones = iteraciones;
 	}
 
@@ -15,7 +15,7 @@ public class Operario implements Runnable {
 	public void run() {
 		for (int i = 0; i < iteraciones; i++) {
 			try {
-				operarios.construirDetalle(detalle);
+				operarios.construir(objeto);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

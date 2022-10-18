@@ -1,6 +1,6 @@
 package main;
 
-public class Marco extends Detalle {
+public class Marco extends Objeto {
 
 	static private int numAuto;
 

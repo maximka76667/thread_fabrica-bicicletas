@@ -1,6 +1,6 @@
 package main;
 
-public class Rueda extends Detalle {
+public class Rueda extends Objeto {
 	static private int numAuto;
 
 	static {

@@ -26,8 +26,8 @@ public class Operarios {
 		this.numMaximoMarcos = numMaximoMarcos;
 	}
 
-	public void construirDetalle(String detalle) throws InterruptedException {
-		switch (detalle) {
+	public void construir(String objeto) throws InterruptedException {
+		switch (objeto) {
 		case "rueda":
 			construirRueda();
 			break;
