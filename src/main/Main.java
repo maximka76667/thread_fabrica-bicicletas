@@ -5,18 +5,14 @@ public class Main {
 	public static void main(String[] args) {
 
 		Operarios operarios = new Operarios(8, 2, 2, 2, 10, 4);
-		OperariosMarcos opearariosMarcos = new OperariosMarcos(operarios);
-
-		Thread tOperariosMarcos = new Thread(opearariosMarcos);
-		tOperariosMarcos.start();
 
 		for (int i = 0; i < 2; i++) {
-			Thread tOperarioMarcos = new Thread(new OperarioMarcos(operarios, opearariosMarcos));
+			Thread tOperarioMarcos = new Thread(new OperarioMarcos(operarios), "OM" + i);
 			tOperarioMarcos.start();
 		}
 
 		for (int i = 0; i < 2; i++) {
-			Thread tOperarioRuedas = new Thread(new OperarioRuedas(operarios));
+			Thread tOperarioRuedas = new Thread(new OperarioRuedas(operarios), "OR" + i);
 			tOperarioRuedas.start();
 		}
 

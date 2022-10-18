@@ -3,7 +3,7 @@ package main;
 public class Rueda {
 
 	static private int numAuto;
-	
+
 	static {
 		numAuto = 1;
 	}
@@ -22,4 +22,10 @@ public class Rueda {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	@Override
+	public String toString() {
+		return id;
+	}
+
 }

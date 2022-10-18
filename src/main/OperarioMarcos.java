@@ -2,23 +2,21 @@ package main;
 
 public class OperarioMarcos implements Runnable {
 
-	private OperariosMarcos operariosMarcos;
+	private Operarios operarios;
 	private int iteraciones;
-	private boolean isActive;
 
-	public OperarioMarcos(Operarios operarios, OperariosMarcos operariosMarcos) {
-		this.operariosMarcos = operariosMarcos;
-		this.iteraciones = operarios.getNumBicicletas();
-		this.isActive = false;
+	public OperarioMarcos(Operarios operarios) {
+		this.operarios = operarios;
+		this.iteraciones = operarios.getNumBicicletas() / 2;
 	}
 
 	@Override
 	public void run() {
 		for (int i = 0; i < iteraciones; i++) {
-			if (!isActive) {
-				isActive = true;
-				operariosMarcos.activarOperario();
-				isActive = false;
+			try {
+				operarios.construirMarco();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 	}

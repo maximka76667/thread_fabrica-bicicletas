@@ -34,7 +34,7 @@ public class Operarios {
 
 		Thread.sleep(500);
 		Marco nuevoMarco = new Marco();
-		System.out.println("Ha creado un nuevo marco / " + nuevoMarco.getId());
+		System.out.println(Thread.currentThread().getName() + ": ha creado un nuevo marco - " + nuevoMarco.getId());
 		marcos.add(nuevoMarco);
 
 		notifyAll();
@@ -47,7 +47,7 @@ public class Operarios {
 		}
 		Thread.sleep(100);
 		Rueda nuevaRueda = new Rueda();
-		System.out.println("Ha creado una nueva rueda / " + nuevaRueda.getId());
+		System.out.println(Thread.currentThread().getName() + ": ha creado una nueva rueda - " + nuevaRueda.getId());
 		ruedas.add(nuevaRueda);
 		notifyAll();
 	}
