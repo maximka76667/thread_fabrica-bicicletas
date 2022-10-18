@@ -111,32 +111,16 @@ public class Operarios {
 		return numBicicletas;
 	}
 
-	public void setNumBicicletas(int numBicicletas) {
-		this.numBicicletas = numBicicletas;
-	}
-
 	public int getNumOperariosRuedas() {
 		return numOperariosRuedas;
-	}
-
-	public void setNumOperariosRuedas(int numOperariosRuedas) {
-		this.numOperariosRuedas = numOperariosRuedas;
 	}
 
 	public int getNumOperariosMarcos() {
 		return numOperariosMarcos;
 	}
 
-	public void setNumOperariosMarcos(int numOperariosMarcos) {
-		this.numOperariosMarcos = numOperariosMarcos;
-	}
-
 	public int getNumMontadores() {
 		return numMontadores;
-	}
-
-	public void setNumMontadores(int numMontadores) {
-		this.numMontadores = numMontadores;
 	}
 
 }
